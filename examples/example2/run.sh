@@ -38,9 +38,9 @@ cp outputs/gcc.steady gcc.init
 # viewing. Note that we need to first split gcc.grid.steady into layer-specific temperature
 # files. Although we've only given a single layer to be simulated, HotSpot is also simulating
 # the Thermal Interface Material (TIM), heat spreader, and heat sink as separate layers
-../../scripts/split_grid_steady.py outputs/gcc.grid.steady 4 64 64
+python ../../scripts/split_grid_steady.py outputs/gcc.grid.steady 4 64 64
 ../../scripts/grid_thermal_map.pl ev6.flp outputs/gcc_layer0.grid.steady > outputs/gcc.svg
-../../scripts/grid_thermal_map.py ev6.flp outputs/gcc_layer0.grid.steady outputs/gcc.png
+python ../../scripts/grid_thermal_map.py ev6.flp outputs/gcc_layer0.grid.steady outputs/gcc.png
 
 # HotSpot also provides the `-grid_transient_file <file>` option to view
 # transient grid temperatures

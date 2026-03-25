@@ -31,6 +31,6 @@ cp outputs/example.steady example.init
 ../../hotspot -c example.config -p example.ptrace -grid_layer_file example.lcf -materials_file example.materials -model_type grid -detailed_3D on -o outputs/example.ttrace -grid_transient_file outputs/example.grid.ttrace
 
 # Visualize Heat Map of Layer 0 with Perl and with Python script
-../../scripts/split_grid_steady.py outputs/example.grid.steady 6 64 64
-../../scripts/grid_thermal_map.py floorplan2.flp outputs/example_layer2.grid.steady 64 64 outputs/layer2.png
+python ../../scripts/split_grid_steady.py outputs/example.grid.steady 6 64 64
+python ../../scripts/grid_thermal_map.py floorplan2.flp outputs/example_layer2.grid.steady 64 64 outputs/layer2.png
 ../../scripts/grid_thermal_map.pl floorplan2.flp outputs/example_layer2.grid.steady 64 64 > outputs/layer2.svg

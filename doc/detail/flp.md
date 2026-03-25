@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 头文件: [`src/flp.h`](src/flp.h)
-- 源文件: [`src/flp.c`](src/flp.c)
+- 头文件: [`src/flp.h`](../../src/flp.h)
+- 源文件: [`src/flp.c`](../../src/flp.c)
 
 ## 功能概述
 

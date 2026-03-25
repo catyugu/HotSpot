@@ -59,15 +59,15 @@ hotspot.c (主入口)
 
 ### 1. 热配置结构 (thermal_config_t)
 
-位于 [`temperature.h`](src/temperature.h)，定义芯片、散热器、扩散器、接口材料的物理参数。
+位于 [`temperature.h`](../../src/temperature.h)，定义芯片、散热器、扩散器、接口材料的物理参数。
 
 ### 2. RC模型结构 (RC_model_t)
 
-位于 [`temperature.h`](src/temperature.h)，是块模型和网格模型的联合类型。
+位于 [`temperature.h`](../../src/temperature.h)，是块模型和网格模型的联合类型。
 
 ### 3. 布局结构 (flp_t)
 
-位于 [`flp.h`](src/flp.h)，存储功能单元的位置和尺寸信息。
+位于 [`flp.h`](../../src/flp.h)，存储功能单元的位置和尺寸信息。
 
 ## 核心算法
 
@@ -78,13 +78,13 @@ hotspot.c (主入口)
 
 ## 下一章
 
-- [hotspot.md](detail/hotspot.md) - 主程序入口详解
-- [temperature.md](detail/temperature.md) - 温度计算核心
-- [temperature_block.md](detail/temperature_block.md) - 块级模型
-- [temperature_grid.md](detail/temperature_grid.md) - 网格级模型
-- [flp.md](detail/flp.md) - 布局管理
-- [util.md](detail/util.md) - 工具函数
-- [RCutil.md](detail/RCutil.md) - 矩阵运算
-- [materials.md](detail/materials.md) - 材料属性
-- [microchannel.md](detail/microchannel.md) - 微流控冷却
-- [package.md](detail/package.md) - 封装模型
+- [hotspot.md](hotspot.md) - 主程序入口详解
+- [temperature.md](temperature.md) - 温度计算核心
+- [temperature_block.md](temperature_block.md) - 块级模型
+- [temperature_grid.md](temperature_grid.md) - 网格级模型
+- [flp.md](flp.md) - 布局管理
+- [util.md](util.md) - 工具函数
+- [RCutil.md](RCutil.md) - 矩阵运算
+- [materials.md](materials.md) - 材料属性
+- [microchannel.md](microchannel.md) - 微流控冷却
+- [package.md](package.md) - 封装模型

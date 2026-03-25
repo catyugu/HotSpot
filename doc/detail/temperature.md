@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 头文件: [`src/temperature.h`](src/temperature.h)
-- 源文件: [`src/temperature.c`](src/temperature.c)
+- 头文件: [`src/temperature.h`](../../src/temperature.h)
+- 源文件: [`src/temperature.c`](../../src/temperature.c)
 
 ## 功能概述
 

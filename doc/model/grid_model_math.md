@@ -47,7 +47,7 @@ Cell (i, j, k) 表示第 k 层的网格单元 (i, j)
 
 ### 2.2 网格数据结构
 
-在 [src/temperature_grid.h](src/temperature_grid.h) 中定义的核心数据结构：
+在 [src/temperature_grid.h](../../src/temperature_grid.h) 中定义的核心数据结构：
 
 ```c
 /* 网格模型的温度向量类型 */
@@ -121,7 +121,7 @@ Q_z- = k * A_xy / dz * (T[k-1] - T[k])   // z 负方向（下层）
 
 ### 3.3 热阻计算
 
-在 [src/temperature_grid.c](src/temperature_grid.c) 中的 `populate_R_model_grid()` 函数计算热阻：
+在 [src/temperature_grid.c](../../src/temperature_grid.c) 中的 `populate_R_model_grid()` 函数计算热阻：
 
 ```c
 /* 层特定热阻 */
@@ -145,7 +145,7 @@ double getr(double conductivity, double thickness, double area) {
 
 ### 3.4 电阻查找函数
 
-`find_res()` 函数（[src/temperature_grid.c:26](src/temperature_grid.c:26)）计算相邻网格单元间的等效热阻，处理多种情况：
+`find_res()` 函数（[src/temperature_grid.c:26](../../src/temperature_grid.c:26)）计算相邻网格单元间的等效热阻，处理多种情况：
 
 ```c
 double find_res(grid_model_t *model, int n1, int i1, int j1, int n2, int i2, int j2) {
@@ -206,7 +206,7 @@ glist_t *g2bmap;  // [block_id] -> grid cell range
 
 ### 4.3 映射建立过程
 
-`set_bgmap()` 函数（[src/temperature_grid.c:341](src/temperature_grid.c:341)）建立块网格映射：
+`set_bgmap()` 函数（[src/temperature_grid.c:341](../../src/temperature_grid.c:341)）建立块网格映射：
 
 ```c
 void set_bgmap(grid_model_t *model, layer_t *layer) {
@@ -235,7 +235,7 @@ void set_bgmap(grid_model_t *model, layer_t *layer) {
 
 ### 4.4 映射模式
 
-在 [src/temperature.h](src/temperature.h) 中定义的映射模式：
+在 [src/temperature.h](../../src/temperature.h) 中定义的映射模式：
 
 ```c
 #define GRID_AVG     0  /* 所有覆盖单元的平均值 */
@@ -279,7 +279,7 @@ void xlate_temp_g2b(grid_model_t *model, double *b, grid_model_vector_t *g) {
 
 稳态温度满足 $G \cdot T = P \cdot R$，其中 $G$ 是热导矩阵，$T$ 是温度向量，$P$ 是功率向量，$R$ 是热阻。
 
-在 [src/temperature.c](src/temperature.c) 中的 `steady_state_temp_grid()` 函数实现迭代求解：
+在 [src/temperature.c](../../src/temperature.c) 中的 `steady_state_temp_grid()` 函数实现迭代求解：
 
 ```c
 void steady_state_temp_grid(grid_model_t *model, double *power, double *temp) {
@@ -328,7 +328,7 @@ T_new[i][j][k] = (P[i][j][k] + Σ G_neighbor * T_neighbor) / G_diag
 
 ### 5.3 多层3D热阻处理
 
-当启用 `detailed_3D_used` 时（[src/temperature_grid.c:392](src/temperature_grid.c:392)），每个网格单元可以有不同的电阻值：
+当启用 `detailed_3D_used` 时（[src/temperature_grid.c:392](../../src/temperature_grid.c:392)），每个网格单元可以有不同的电阻值：
 
 ```c
 if (model->config.detailed_3D_used) {
@@ -401,28 +401,28 @@ if (i == hsidx) {
 
 | 功能 | 函数名 | 源文件 |
 |------|--------|--------|
-| 网格模型分配 | `alloc_grid_model()` | [src/temperature_grid.c:896](src/temperature_grid.c:896) |
-| R矩阵构建 | `populate_R_model_grid()` | [src/temperature_grid.c:950](src/temperature_grid.c:950) |
-| C矩阵构建 | `populate_C_model_grid()` | [src/temperature_grid.c:1065](src/temperature_grid.c:1065) |
-| 块到网格映射 | `set_bgmap()` | [src/temperature_grid.c:341](src/temperature_grid.c:341) |
-| 块功率到网格 | `xlate_vector_b2g()` | [src/temperature_grid.c](src/temperature_grid.c) |
-| 网格温度到块 | `xlate_temp_g2b()` | [src/temperature_grid.c](src/temperature_grid.c) |
-| 稳态求解 | `steady_state_temp_grid()` | [src/temperature.c](src/temperature.c) |
-| 瞬态求解 | `compute_temp_grid()` | [src/temperature.c](src/temperature.c) |
+| 网格模型分配 | `alloc_grid_model()` | [src/temperature_grid.c:896](../../src/temperature_grid.c:896) |
+| R矩阵构建 | `populate_R_model_grid()` | [src/temperature_grid.c:950](../../src/temperature_grid.c:950) |
+| C矩阵构建 | `populate_C_model_grid()` | [src/temperature_grid.c:1065](../../src/temperature_grid.c:1065) |
+| 块到网格映射 | `set_bgmap()` | [src/temperature_grid.c:341](../../src/temperature_grid.c:341) |
+| 块功率到网格 | `xlate_vector_b2g()` | [src/temperature_grid.c](../../src/temperature_grid.c) |
+| 网格温度到块 | `xlate_temp_g2b()` | [src/temperature_grid.c](../../src/temperature_grid.c) |
+| 稳态求解 | `steady_state_temp_grid()` | [src/temperature.c](../../src/temperature.c) |
+| 瞬态求解 | `compute_temp_grid()` | [src/temperature.c](../../src/temperature.c) |
 
 ### 7.2 关键数据结构
 
 | 数据结构 | 定义位置 | 用途 |
 |----------|----------|------|
-| `grid_model_t` | [src/temperature_grid.h:138](src/temperature_grid.h:138) | 完整网格热模型 |
-| `layer_t` | [src/temperature_grid.h:101](src/temperature_grid.h:101) | 单层网格配置 |
-| `blist_t` | [src/temperature_grid.h:63](src/temperature_grid.h:63) | 块列表（b2gmap节点） |
-| `glist_t` | [src/temperature_grid.h:86](src/temperature_grid.h:86) | 网格列表（g2bmap节点） |
-| `grid_model_vector_t` | [src/temperature_grid.h:129](src/temperature_grid.h:129) | 网格温度/功率向量 |
+| `grid_model_t` | [src/temperature_grid.h:138](../../src/temperature_grid.h:138) | 完整网格热模型 |
+| `layer_t` | [src/temperature_grid.h:101](../../src/temperature_grid.h:101) | 单层网格配置 |
+| `blist_t` | [src/temperature_grid.h:63](../../src/temperature_grid.h:63) | 块列表（b2gmap节点） |
+| `glist_t` | [src/temperature_grid.h:86](../../src/temperature_grid.h:86) | 网格列表（g2bmap节点） |
+| `grid_model_vector_t` | [src/temperature_grid.h:129](../../src/temperature_grid.h:129) | 网格温度/功率向量 |
 
 ### 7.3 配置参数
 
-网格模型配置通过 `thermal_config_t` 结构（[src/temperature.h:141](src/temperature.h:141)）管理：
+网格模型配置通过 `thermal_config_t` 结构（[src/temperature.h:141](../../src/temperature.h:141)）管理：
 
 ```c
 /* 网格模型特定参数 */

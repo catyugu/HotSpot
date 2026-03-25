@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 头文件: [`src/shape.h`](src/shape.h)
-- 源文件: [`src/shape.c`](src/shape.c)
+- 头文件: [`src/shape.h`](../../src/shape.h)
+- 源文件: [`src/shape.c`](../../src/shape.c)
 
 ## 功能概述
 

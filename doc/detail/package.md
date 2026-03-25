@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 头文件: [`src/package.h`](src/package.h)
-- 源文件: [`src/package.c`](src/package.c)
+- 头文件: [`src/package.h`](../../src/package.h)
+- 源文件: [`src/package.c`](../../src/package.c)
 
 ## 功能概述
 
@@ -74,7 +74,7 @@ typedef struct convection_t_st {
 
 ### package_RC_t
 
-封装RC参数结构（在 [`temperature.h`](src/temperature.h) 中定义），存储封装层的热阻热容：
+封装RC参数结构（在 [`temperature.h`](../../src/temperature.h) 中定义），存储封装层的热阻热容：
 
 ```c
 typedef struct package_RC_t_st {

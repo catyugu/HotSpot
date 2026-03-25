@@ -2,12 +2,12 @@
 
 ## 文件位置
 
-- 源文件: [`src/flp_desc.c`](src/flp_desc.c)
-- 声明: [`src/flp.h`](src/flp.h)（布局描述类型和函数声明）
+- 源文件: [`src/flp_desc.c`](../../src/flp_desc.c)
+- 声明: [`src/flp.h`](../../src/flp.h)（布局描述类型和函数声明）
 
 ## 功能概述
 
-布局描述模块负责解析和管理**未放置**的功能单元布局描述。与 [`flp.c`](src/flp.c) 的区别在于：
+布局描述模块负责解析和管理**未放置**的功能单元布局描述。与 [`flp.c`](../../src/flp.c) 的区别在于：
 
 | 特性 | flp.c | flp_desc.c |
 |------|-------|------------|
@@ -233,7 +233,7 @@ shape_t *shape_from_aspect(
 
 ## 与 flp.c 的协作
 
-[`flp.c`](src/flp.md) 中的 `flp_placeholder()` 函数从布局描述创建空布局结构：
+[`flp.c`](../../src/flp.c) 中的 `flp_placeholder()` 函数从布局描述创建空布局结构：
 
 ```c
 flp_t *flp_placeholder(flp_desc_t *flp_desc)

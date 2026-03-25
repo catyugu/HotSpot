@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 头文件: [`src/wire.h`](src/wire.h)
-- 源文件: [`src/wire.c`](src/wire.c)
+- 头文件: [`src/wire.h`](../../src/wire.h)
+- 源文件: [`src/wire.c`](../../src/wire.c)
 
 ## 功能概述
 

@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 头文件: [`src/microchannel.h`](src/microchannel.h)
-- 源文件: [`src/microchannel.c`](src/microchannel.c)
+- 头文件: [`src/microchannel.h`](../../src/microchannel.h)
+- 源文件: [`src/microchannel.c`](../../src/microchannel.c)
 
 ## 功能概述
 

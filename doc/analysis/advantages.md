@@ -40,7 +40,7 @@ HotSpot 采用块模型与网格模型并存的双模型架构，两种模型通
 - **适合早期探索**：在设计早期，功能单元数量有限，块模型可以快速给出合理的热趋势预测
 - **侧向热阻可选**：通过 `block_omit_lateral` 配置参数，设计者可以选择是否考虑单元之间的侧向热传导
 
-块模型的实现位于 [`src/temperature_block.c`](src/temperature_block.c)，其核心函数 `steady_state_temp_block()` 使用 LUP 分解求解稳态热方程。
+块模型的实现位于 [`src/temperature_block.c`](../../src/temperature_block.c)，其核心函数 `steady_state_temp_block()` 使用 LUP 分解求解稳态热方程。
 
 #### 网格模型
 
@@ -50,7 +50,7 @@ HotSpot 采用块模型与网格模型并存的双模型架构，两种模型通
 - **支持多层结构**：通过层配置文件（`.lcf`），网格模型可以描述三维堆叠结构中的多层堆叠
 - **与微流控集成**：微通道冷却层作为网格模型的一个特殊层进行热耦合计算
 
-网格模型的实现位于 [`src/temperature_grid.c`](src/temperature_grid.c)，采用迭代 Jacobi 松弛法求解热方程。
+网格模型的实现位于 [`src/temperature_grid.c`](../../src/temperature_grid.c)，采用迭代 Jacobi 松弛法求解热方程。
 
 #### 统一接口设计
 

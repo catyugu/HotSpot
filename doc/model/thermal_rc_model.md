@@ -395,7 +395,7 @@ HotSpot 中的时间步长控制：
 
 ### 9.1 热阻计算
 
-热阻计算由 `getr()` 函数完成，位于 [src/RCutil.c](src/RCutil.c)。
+热阻计算由 `getr()` 函数完成，位于 [src/RCutil.c](../../src/RCutil.c)。
 
 ```c
 double getr(int m, int n, flp_t *flp, R_model_t *rcd)
@@ -408,7 +408,7 @@ double getr(int m, int n, flp_t *flp, R_model_t *rcd)
 
 ### 9.2 热容计算
 
-热容计算由 `getcap()` 函数完成，位于 [src/RCutil.c](src/RCutil.c)。
+热容计算由 `getcap()` 函数完成，位于 [src/RCutil.c](../../src/RCutil.c)。
 
 ```c
 double getcap(int n, flp_t *flp, RC_model_t *rcm)
@@ -421,7 +421,7 @@ double getcap(int n, flp_t *flp, RC_model_t *rcm)
 
 ### 9.3 矩阵构建
 
-块模型的热阻和热容矩阵构建由 `populate_R_model_block()` 函数完成，位于 [src/temperature_block.c](src/temperature_block.c)。
+块模型的热阻和热容矩阵构建由 `populate_R_model_block()` 函数完成，位于 [src/temperature_block.c](../../src/temperature_block.c)。
 
 ```c
 void populate_R_model_block(RC_model_t *rcm, flp_t *flp)
@@ -435,7 +435,7 @@ void populate_R_model_block(RC_model_t *rcm, flp_t *flp)
 
 ### 9.4 稳态求解
 
-稳态温度求解由 `steady_state_temp_block()` 函数完成，位于 [src/temperature_block.c](src/temperature_block.c)。
+稳态温度求解由 `steady_state_temp_block()` 函数完成，位于 [src/temperature_block.c](../../src/temperature_block.c)。
 
 ```c
 int steady_state_temp_block(RC_model_t *rcm, flp_t *flp, 
@@ -452,7 +452,7 @@ int steady_state_temp_block(RC_model_t *rcm, flp_t *flp,
 
 ### 9.5 瞬态求解
 
-瞬态温度求解由 `compute_temp_block()` 函数完成，位于 [src/temperature_block.c](src/temperature_block.c)。
+瞬态温度求解由 `compute_temp_block()` 函数完成，位于 [src/temperature_block.c](../../src/temperature_block.c)。
 
 ```c
 int compute_temp_block(RC_model_t *rcm, flp_t *flp, 

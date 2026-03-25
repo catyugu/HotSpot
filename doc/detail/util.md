@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 头文件: [`src/util.h`](src/util.h)
-- 源文件: [`src/util.c`](src/util.c)
+- 头文件: [`src/util.h`](../../src/util.h)
+- 源文件: [`src/util.c`](../../src/util.c)
 
 ## 功能概述
 

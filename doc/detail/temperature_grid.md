@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 头文件: [`src/temperature_grid.h`](src/temperature_grid.h)
-- 源文件: [`src/temperature_grid.c`](src/temperature_grid.c)
+- 头文件: [`src/temperature_grid.h`](../../src/temperature_grid.h)
+- 源文件: [`src/temperature_grid.c`](../../src/temperature_grid.c)
 
 ## 功能概述
 

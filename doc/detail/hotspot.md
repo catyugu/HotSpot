@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 源文件: [`src/hotspot.c`](src/hotspot.c)
-- 头文件: [`src/hotspot.h`](src/hotspot.h)
+- 源文件: [`src/hotspot.c`](../../src/hotspot.c)
+- 头文件: [`src/hotspot.h`](../../src/hotspot.h)
 
 ## 功能概述
 

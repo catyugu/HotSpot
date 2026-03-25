@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 头文件: [`src/npe.h`](src/npe.h)
-- 源文件: [`src/npe.c`](src/npe.c)
+- 头文件: [`src/npe.h`](../../src/npe.h)
+- 源文件: [`src/npe.c`](../../src/npe.c)
 
 ## 功能概述
 

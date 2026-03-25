@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 头文件: [`src/materials.h`](src/materials.h)
-- 源文件: [`src/materials.c`](src/materials.c)
+- 头文件: [`src/materials.h`](../../src/materials.h)
+- 源文件: [`src/materials.c`](../../src/materials.c)
 
 ## 功能概述
 

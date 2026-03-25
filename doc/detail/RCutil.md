@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 源文件: [`src/RCutil.c`](src/RCutil.c)
-- 声明: [`src/temperature.h`](src/temperature.h)
+- 源文件: [`src/RCutil.c`](../../src/RCutil.c)
+- 声明: [`src/temperature.h`](../../src/temperature.h)
 
 ## 功能概述
 

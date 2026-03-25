@@ -2,8 +2,8 @@
 
 ## 文件位置
 
-- 源文件: [`src/hotfloorplan.c`](src/hotfloorplan.c)
-- 头文件: [`src/hotfloorplan.h`](src/hotfloorplan.h)
+- 源文件: [`src/hotfloorplan.c`](../../src/hotfloorplan.c)
+- 头文件: [`src/hotfloorplan.h`](../../src/hotfloorplan.h)
 
 ## 功能概述
 
@@ -33,7 +33,7 @@ typedef struct global_config_t_st {
 } global_config_t;
 ```
 
-### flp_config_t（来自 [`flp.h`](src/flp.h)）
+### flp_config_t（来自 [`flp.h`](../../src/flp.h)）
 
 ```c
 typedef struct flp_config_t_st {

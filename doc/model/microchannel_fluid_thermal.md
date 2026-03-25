@@ -199,7 +199,7 @@ htc = Nu × k_f / D_h
 - 建立网络拓扑连接
 - 初始化边界条件
 
-源码位置：[src/microchannel.c](src/microchannel.c)
+源码位置：[src/microchannel.c](../../src/microchannel.c)
 
 ### 6.2 压力求解
 
@@ -208,7 +208,7 @@ htc = Nu × k_f / D_h
 - 设置边界条件向量 b
 - 调用线性方程组求解器
 
-源码位置：[src/microchannel.c](src/microchannel.c)
+源码位置：[src/microchannel.c](../../src/microchannel.c)
 
 ### 6.3 水力传导率计算
 
@@ -218,7 +218,7 @@ htc = Nu × k_f / D_h
 hydroC = (1 - 0.63*(w/h)) * w^3 * h / (12 * mu * L)
 ```
 
-源码位置：[src/microchannel.c](src/microchannel.c)
+源码位置：[src/microchannel.c](../../src/microchannel.c)
 
 ### 6.4 流动速率计算
 
@@ -228,7 +228,7 @@ hydroC = (1 - 0.63*(w/h)) * w^3 * h / (12 * mu * L)
 Q = hydroC * delta_P
 ```
 
-源码位置：[src/microchannel.c](src/microchannel.c)
+源码位置：[src/microchannel.c](../../src/microchannel.c)
 
 ### 6.5 热耦合集成
 
@@ -237,7 +237,7 @@ Q = hydroC * delta_P
 - 更新流体和固体温度
 - 处理能量守恒方程的耦合求解
 
-源码位置：[src/temperature_grid.c](src/temperature_grid.c)
+源码位置：[src/temperature_grid.c](../../src/temperature_grid.c)
 
 ### 6.6 函数调用层次
 

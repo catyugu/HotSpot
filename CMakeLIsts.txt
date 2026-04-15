@@ -41,6 +41,24 @@ else()
   set(MATH_LIBRARY "")
 endif()
 
+set(MKL_FOUND OFF)
+
+if(MATHACCEL EQUAL "1")
+  find_package(MKL REQUIRED)
+
+  if(MKL_FOUND)
+    message(STATUS "Intel MKL found automatically!")
+
+    if(DEFINED MKL_INCLUDE_DIRS)
+      include_directories(${MKL_INCLUDE_DIRS})
+    elseif(DEFINED MKL_INCLUDE)
+      include_directories(${MKL_INCLUDE})
+    endif()
+  else()
+    message(FATAL_ERROR "Intel MKL not found. Please install Intel oneAPI MKL or set MATHACCEL=OFF")
+  endif()
+endif()
+
 # SuperLU dependencies (optional)
 if(USE_SUPERLU)
   # Common SuperLU installation paths (Windows)
@@ -121,6 +139,21 @@ endif()
 
 # Link libraries helper
 set(LINK_LIBS ${MATH_LIBRARY})
+
+# When math acceleration is requested, prefer MKL (if found) otherwise fall
+# back to the generic BLAS/LAPACK variables. Append to LINK_LIBS rather
+# than overwriting it (previous ordering accidentally discarded appended libs).
+if(MATHACCEL EQUAL "1")
+  if(TARGET MKL::MKL)
+    list(APPEND LINK_LIBS MKL::MKL)
+  elseif(DEFINED MKL_LIBRARIES)
+    list(APPEND LINK_LIBS ${MKL_LIBRARIES})
+  elseif(DEFINED MKL_LIBRARY)
+    list(APPEND LINK_LIBS ${MKL_LIBRARY})
+  else()
+    list(APPEND LINK_LIBS ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES})
+  endif()
+endif()
 
 if(USE_SUPERLU)
   list(APPEND LINK_LIBS ${SUPERLU_LIBRARY} ${BLAS_LIBRARIES})

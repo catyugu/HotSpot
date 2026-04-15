@@ -8,6 +8,7 @@ option(USE_SUPERLU "Build with SuperLU acceleration" OFF)
 option(ENABLE_DEBUG "Enable debug build" OFF)
 option(ENABLE_PROFILE "Enable profiling (-pg)" OFF)
 set(VERBOSE_LEVEL "1" CACHE STRING "Verbosity level (0-3)")
+set(MATHACCEL "0" CACHE STRING "Use math acceleration (e.g., MKL, OpenBLAS)")
 
 # Compiler flags
 if(ENABLE_DEBUG)
@@ -20,6 +21,7 @@ endif()
 
 include(CheckCCompilerFlag)
 check_c_compiler_flag("-mavx2" COMPILER_SUPPORTS_AVX2)
+
 if(COMPILER_SUPPORTS_AVX2)
   add_compile_options(-mavx2)
 endif()
@@ -30,6 +32,7 @@ include(CMakeFindDependencyMacro)
 # Math library (always required)
 if(NOT WIN32)
   find_library(MATH_LIBRARY m)
+
   if(NOT MATH_LIBRARY)
     message(FATAL_ERROR "Math library (libm) not found")
   endif()
@@ -37,52 +40,54 @@ else()
   # Windows 下数学库为空
   set(MATH_LIBRARY "")
 endif()
+
 # SuperLU dependencies (optional)
 if(USE_SUPERLU)
   # Common SuperLU installation paths (Windows)
   set(SUPERLU_SEARCH_PATHS
+
     # MSYS2 UCRT64
     "/usr"
     "/usr/local"
   )
-  
+
   # Find SuperLU include directory
   find_path(SUPERLU_INCLUDE_DIR
     NAMES superlu.h slu_ddefs.h
     PATHS
-      ${SUPERLU_SEARCH_PATHS}
-      $ENV{SUPERLU_ROOT}
-      $ENV{SUPERLU_DIR}
+    ${SUPERLU_SEARCH_PATHS}
+    $ENV{SUPERLU_ROOT}
+    $ENV{SUPERLU_DIR}
     PATH_SUFFIXES
-      include
-      include/superlu
-      include/SuperLU
+    include
+    include/superlu
+    include/SuperLU
     DOC "SuperLU include directory"
   )
-  
+
   # Find SuperLU library
   find_library(SUPERLU_LIBRARY
     NAMES superlu superlu_64 libsuperlu libsuperlu_64
     PATHS
-      ${SUPERLU_SEARCH_PATHS}
-      $ENV{SUPERLU_ROOT}
-      $ENV{SUPERLU_DIR}
+    ${SUPERLU_SEARCH_PATHS}
+    $ENV{SUPERLU_ROOT}
+    $ENV{SUPERLU_DIR}
     PATH_SUFFIXES
-      lib
-      lib64
-      lib/x64
+    lib
+    lib64
+    lib/x64
     DOC "SuperLU library file"
   )
-  
+
   # Find BLAS
   find_package(BLAS REQUIRED)
-  
+
   # Check if SuperLU was found
   include(FindPackageHandleStandardArgs)
   find_package_handle_standard_args(SUPERLU
     REQUIRED_VARS SUPERLU_LIBRARY SUPERLU_INCLUDE_DIR
   )
-  
+
   if(SUPERLU_FOUND)
     message(STATUS "Found SuperLU include: ${SUPERLU_INCLUDE_DIR}")
     message(STATUS "Found SuperLU library: ${SUPERLU_LIBRARY}")
@@ -101,10 +106,14 @@ set(COMMON_SOURCES
 
 # Common library
 add_library(hotspot_common STATIC ${COMMON_SOURCES})
-target_include_directories(hotspot_common PUBLIC 
+target_include_directories(hotspot_common PUBLIC
   ${CMAKE_SOURCE_DIR}/src
 )
-target_compile_definitions(hotspot_common PRIVATE VERBOSE=${VERBOSE_LEVEL} SUPERLU=$<BOOL:${USE_SUPERLU}> MATHACCEL=0)
+target_compile_definitions(hotspot_common PRIVATE
+  VERBOSE=${VERBOSE_LEVEL}
+  SUPERLU=$<BOOL:${USE_SUPERLU}>
+  MATHACCEL=${MATHACCEL}
+)
 
 if(USE_SUPERLU)
   target_include_directories(hotspot_common PRIVATE ${SUPERLU_INCLUDE_DIR})
@@ -112,6 +121,7 @@ endif()
 
 # Link libraries helper
 set(LINK_LIBS ${MATH_LIBRARY})
+
 if(USE_SUPERLU)
   list(APPEND LINK_LIBS ${SUPERLU_LIBRARY} ${BLAS_LIBRARIES})
 endif()

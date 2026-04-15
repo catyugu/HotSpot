@@ -170,5 +170,10 @@ target_link_libraries(hotfloorplan PRIVATE hotspot_common ${LINK_LIBS})
 add_library(libhotspot STATIC ${COMMON_SOURCES})
 set_target_properties(libhotspot PROPERTIES OUTPUT_NAME hotspot)
 
-# # Install
-# install(TARGETS hotspot hotfloorplan libhotspot RUNTIME DESTINATION bin ARCHIVE DESTINATION lib)
+# Copy the executables from build to the project root for easier access
+add_custom_command(TARGET hotspot POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:hotspot> ${CMAKE_SOURCE_DIR}/hotspot
+)
+add_custom_command(TARGET hotfloorplan POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:hotfloorplan> ${CMAKE_SOURCE_DIR}/hotfloorplan
+)

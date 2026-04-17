@@ -61,57 +61,25 @@ endif()
 
 # SuperLU dependencies (optional)
 if(USE_SUPERLU)
-  # Common SuperLU installation paths (Windows)
-  set(SUPERLU_SEARCH_PATHS
+  set(CPM_DOWNLOAD_VERSION 0.40.2)
+  set(CPM_DOWNLOAD_URL https://github.com/cpm-cmake/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake)
 
-    # MSYS2 UCRT64
-    "/usr"
-    "/usr/local"
-  )
-
-  # Find SuperLU include directory
-  find_path(SUPERLU_INCLUDE_DIR
-    NAMES superlu.h slu_ddefs.h
-    PATHS
-    ${SUPERLU_SEARCH_PATHS}
-    $ENV{SUPERLU_ROOT}
-    $ENV{SUPERLU_DIR}
-    PATH_SUFFIXES
-    include
-    include/superlu
-    include/SuperLU
-    DOC "SuperLU include directory"
-  )
-
-  # Find SuperLU library
-  find_library(SUPERLU_LIBRARY
-    NAMES superlu superlu_64 libsuperlu libsuperlu_64
-    PATHS
-    ${SUPERLU_SEARCH_PATHS}
-    $ENV{SUPERLU_ROOT}
-    $ENV{SUPERLU_DIR}
-    PATH_SUFFIXES
-    lib
-    lib64
-    lib/x64
-    DOC "SuperLU library file"
-  )
-
-  # Find BLAS
-  find_package(BLAS REQUIRED)
-
-  # Check if SuperLU was found
-  include(FindPackageHandleStandardArgs)
-  find_package_handle_standard_args(SUPERLU
-    REQUIRED_VARS SUPERLU_LIBRARY SUPERLU_INCLUDE_DIR
-  )
-
-  if(SUPERLU_FOUND)
-    message(STATUS "Found SuperLU include: ${SUPERLU_INCLUDE_DIR}")
-    message(STATUS "Found SuperLU library: ${SUPERLU_LIBRARY}")
-  else()
-    message(FATAL_ERROR "SuperLU not found! Please install SuperLU or set SUPERLU_ROOT/SUPERLU_DIR environment variable, or pass -DSUPERLU_INCLUDE_DIR=... -DSUPERLU_LIBRARY=...")
+  if(NOT EXISTS ${CMAKE_BINARY_DIR}/cmake/CPM.cmake)
+    file(DOWNLOAD ${CPM_DOWNLOAD_URL} ${CMAKE_BINARY_DIR}/cmake/CPM.cmake)
   endif()
+
+  include(${CMAKE_BINARY_DIR}/cmake/CPM.cmake)
+
+  CPMAddPackage(
+    NAME SuperLU
+    GITHUB_REPOSITORY xiaoyeli/superlu
+    VERSION 6.0.0
+    OPTIONS
+    "BUILD_SHARED_LIBS OFF" # 编译成静态库（最稳，无DLL）
+    "CMAKE_BUILD_TYPE Release"
+    "enable_tests OFF" # 关闭测试，加快编译
+    "CMAKE_POLICY_VERSION_MINIMUM 3.5"
+  )
 endif()
 
 # Source files
@@ -133,10 +101,6 @@ target_compile_definitions(hotspot_common PRIVATE
   MATHACCEL=${MATHACCEL}
 )
 
-if(USE_SUPERLU)
-  target_include_directories(hotspot_common PRIVATE ${SUPERLU_INCLUDE_DIR})
-endif()
-
 # Link libraries helper
 set(LINK_LIBS ${MATH_LIBRARY})
 
@@ -156,7 +120,7 @@ if(MATHACCEL EQUAL "1")
 endif()
 
 if(USE_SUPERLU)
-  list(APPEND LINK_LIBS ${SUPERLU_LIBRARY} ${BLAS_LIBRARIES})
+  target_link_libraries(hotspot_common PUBLIC superlu)
 endif()
 
 # Executables
@@ -166,7 +130,7 @@ target_link_libraries(hotspot PRIVATE hotspot_common ${LINK_LIBS})
 add_executable(hotfloorplan src/hotfloorplan.c)
 target_link_libraries(hotfloorplan PRIVATE hotspot_common ${LINK_LIBS})
 
-# Static library for compatibility
+# Static library
 add_library(libhotspot STATIC ${COMMON_SOURCES})
 set_target_properties(libhotspot PROPERTIES OUTPUT_NAME hotspot)
 

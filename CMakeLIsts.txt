@@ -135,9 +135,19 @@ add_library(libhotspot STATIC ${COMMON_SOURCES})
 set_target_properties(libhotspot PROPERTIES OUTPUT_NAME hotspot)
 
 # Copy the executables from build to the project root for easier access
-add_custom_command(TARGET hotspot POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:hotspot> ${CMAKE_SOURCE_DIR}/hotspot
-)
-add_custom_command(TARGET hotfloorplan POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:hotfloorplan> ${CMAKE_SOURCE_DIR}/hotfloorplan
-)
+# If is windows, name them with .exe suffix
+if(WIN32)
+  add_custom_command(TARGET hotspot POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:hotspot> ${CMAKE_SOURCE_DIR}/hotspot.exe
+  )
+  add_custom_command(TARGET hotfloorplan POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:hotfloorplan> ${CMAKE_SOURCE_DIR}/hotfloorplan.exe
+  )
+else()
+  add_custom_command(TARGET hotspot POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:hotspot> ${CMAKE_SOURCE_DIR}/hotspot
+  )
+  add_custom_command(TARGET hotfloorplan POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:hotfloorplan> ${CMAKE_SOURCE_DIR}/hotfloorplan
+  )
+endif()

@@ -1,6 +1,10 @@
+*
+!*/
+!*.*
+
+*.exe
+
 build
 outputs
 .vscode
 .idea
-*
-*.exe

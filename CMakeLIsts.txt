@@ -44,11 +44,16 @@ endif()
 set(MKL_FOUND OFF)
 
 if(MATHACCEL EQUAL "1")
+  # 在 find_package 之前强制指定 MKL 的配置行为
+  set(MKL_LINK "static")           # 强制静态链接，避免运行时缺 DLL/.so
+  set(MKL_INTERFACE "lp64")        # 强制使用 32 位整数接口，匹配标准 C 的 int 类型
+  set(MKL_THREADING "sequential")  # 先使用单线程模式测试。如果确认没问题，之后可以改为 "omp" 并链接 OpenMP
+
   find_package(MKL REQUIRED)
 
   if(MKL_FOUND)
     message(STATUS "Intel MKL found automatically!")
-
+    
     if(DEFINED MKL_INCLUDE_DIRS)
       include_directories(${MKL_INCLUDE_DIRS})
     elseif(DEFINED MKL_INCLUDE)
@@ -104,9 +109,6 @@ target_compile_definitions(hotspot_common PRIVATE
 # Link libraries helper
 set(LINK_LIBS ${MATH_LIBRARY})
 
-# When math acceleration is requested, prefer MKL (if found) otherwise fall
-# back to the generic BLAS/LAPACK variables. Append to LINK_LIBS rather
-# than overwriting it (previous ordering accidentally discarded appended libs).
 if(MATHACCEL EQUAL "1")
   if(TARGET MKL::MKL)
     list(APPEND LINK_LIBS MKL::MKL)
@@ -115,7 +117,7 @@ if(MATHACCEL EQUAL "1")
   elseif(DEFINED MKL_LIBRARY)
     list(APPEND LINK_LIBS ${MKL_LIBRARY})
   else()
-    list(APPEND LINK_LIBS ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES})
+    message(FATAL_ERROR "MATHACCEL enabled but MKL not found")
   endif()
 endif()
 
